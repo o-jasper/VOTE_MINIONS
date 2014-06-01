@@ -1,0 +1,11 @@
+
+init:
+code:
+    fromtime = contract.storage[msg.sender]
+
+    if contract.storage[msg.sender] and block.timestamp - fromtime > msg.data[1]:
+        if msg.datasize == 2:
+            msg(tx.gas - 21, msg.data[0], 0, [msg.data[1]], 1, 0)
+            contract.storage[msg.sender] = fromtime + msg.data[1]
+        elif contract.storage[msg.sender] == 0 and msg.datasize == 0:
+            contract.storage[msg.sender] = block.timestamp
