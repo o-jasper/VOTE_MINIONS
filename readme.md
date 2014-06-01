@@ -10,3 +10,13 @@ Hopefully the PoC release will have a nice browser so this can be shown nicely.
 * Figure out how to deal with people without ethers. (ask Vlad Zamfir)
 
 * Test more. Both on testnet and with readily-runnable tests.
+
+#### Some more things
+
+* Collecting many votes into a single small transaction?
+
+* Limitations with regards to voting on single issues, and total saved up voting
+  time?
+
+* (eventually) identifying humans. Already can add a contract address that does
+  this? Use DDOUG?
