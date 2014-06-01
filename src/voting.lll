@@ -1,0 +1,31 @@
+(RETURN 0 
+    (lll 
+        (seq 
+            (MSTORE8 95 0)
+            (seq 
+                (MSTORE 0 (SLOAD (CALLER)))
+                (if (AND (SLOAD (CALLER)) (SGT (SUB (TIMESTAMP) (MLOAD 0)) (CALLDATALOAD 32))) 
+                    (unless (NOT (EQ (DIV (CALLDATASIZE) 32) 2)) 
+                        (seq 
+                            (seq 
+                                (MSTORE 32 0)
+                                (MSTORE 64 (alloc (MLOAD 32)))
+                                (POP 
+                                    (CALL (SUB (GAS) 21) (CALLDATALOAD 0) 0 (array_lit (CALLDATALOAD 32)) 32 64 
+                                        (MLOAD 32)
+                                    )
+                                )
+                                (MLOAD 64)
+                            )
+                            (SSTORE (CALLER) (ADD (MLOAD 0) (CALLDATALOAD 32)))
+                        )
+                    )
+                    (unless (NOT (AND (EQ (SLOAD (CALLER)) 0) (EQ (DIV (CALLDATASIZE) 32) 0))) 
+                        (SSTORE (CALLER) (TIMESTAMP))
+                    )
+                )
+            )
+        )
+        0
+    )
+)

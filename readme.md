@@ -9,4 +9,4 @@ Hopefully the PoC release will have a nice browser so this can be shown nicely.
 
 * Figure out how to deal with people without ethers. (ask Vlad Zamfir)
 
-* Test more.
+* Test more. Both on testnet and with readily-runnable tests.
