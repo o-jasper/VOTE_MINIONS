@@ -19,6 +19,8 @@ Hopefully the PoC release will have a nice browser so this can be shown nicely.
 
 #### Some more things
 
+* Scalability!
+
 * Collecting many votes from different people into a single small transaction?
 
 * (eventually) identifying humans. Already can add a contract address that does
