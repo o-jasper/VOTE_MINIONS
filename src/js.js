@@ -38,6 +38,7 @@ function update_spend_time()
 {   
     update_power_time();
     
+    pct = (100*spend_time.value/power_available()).toString().substr(0,4)
     if( spend_time.value < 0 )  // Reset stuff that is disallowed.
     { amount_note.innerHTML = 'Negative disallowed';
       amount_note.style = 'color:red'
@@ -45,12 +46,12 @@ function update_spend_time()
       return;
     }
     if( spend_time.value > power_available() )
-    { amount_note.innerHTML = 'Dont have that much';
+    { amount_note.innerHTML = 'Dont have that much (' + pct +'%)';
       amount_note.style = 'color:red'
       spend_time.value = old_spend_val;
       return;
     }
-    amount_note.innerHTML = '(ok)';
+    amount_note.innerHTML = '(' + pct + '%)';
     amount_note.style = 'color:#777'
     old_spend_val = spend_time.value;
 }
@@ -89,7 +90,7 @@ function update_spend_addr()
 {
     update_power_time();
     if( spend_addr.value == '' )
-    { spend_addr_note.innerHTML='Needs value';
+    { spend_addr_note.innerHTML='Needs recipient';
       spend_addr_note.style='color:#444';
       return;
     }
