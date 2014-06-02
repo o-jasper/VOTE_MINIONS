@@ -13,6 +13,10 @@ Hopefully the PoC release will have a nice browser so this can be shown nicely.
   [evm-sim](https://github.com/EtherCasts/evm-sim/) or 
   [ace](https://gitorious.org/robmyers/ethereum-ace/source/20aba9c820bbfa2a7bd7bf9870411663a438f500:).
 
+* Hitting return gets you to next form element.
+
+* Confirming before acting.
+
 #### Some more things
 
 * Collecting many votes from different people into a single small transaction?

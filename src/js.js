@@ -8,9 +8,11 @@ var spend_addr  = document.getElementById("spend_addr");
 var power_time  = document.getElementById("power_time");
 var progress    = document.getElementById("progress");
 var passed      = document.getElementById("passed");
+var to_fraction = document.getElementById("to_fraction");
 
 var amount_note     = document.getElementById("amount_note");
 var spend_addr_note = document.getElementById("spend_addr_note");
+
 
 var vote_address = "TODO";
 
@@ -33,27 +35,48 @@ function update_power_time()
     power_time.innerHTML = power_available();
 }
 
+function notition(element, className, innerHTML)
+{
+    element.innerHTML = innerHTML;
+    element.className = className;
+}
+
+var fractions = [10, 25, 50, 100];
+var cur_fraction = 0;
+function button_to_fraction()
+{
+    spend_time.value = Math.round(fractions[cur_fraction]*power_available()/100);
+    cur_fraction += 1;
+    if(cur_fraction > fractions.length - 1)
+    {  cur_fraction = 0; }
+    text = 'to ' + fractions[cur_fraction] + '%';
+    if( text == 'to 100%' ){ text = 'ALL'; }
+    to_fraction.innerHTML = text;
+    update_spend_time();
+}
+
 var old_spend_val = 0;
 function update_spend_time()
 {   
     update_power_time();
-    
-    pct = (100*spend_time.value/power_available()).toString().substr(0,4)
-    if( spend_time.value < 0 )  // Reset stuff that is disallowed.
-    { amount_note.innerHTML = 'Negative disallowed';
-      amount_note.style = 'color:red'
+
+    if( spend_time.value == 0 && spend_time.value!='0' )  //TODO get something decent.
+    { notition(amount_note, 'wrong', 'Not a number');
       spend_time.value = old_spend_val;
-      return;
     }
-    if( spend_time.value > power_available() )
-    { amount_note.innerHTML = 'Dont have that much (' + pct +'%)';
-      amount_note.style = 'color:red'
+    else if( spend_time.value < 0 )  // Reset stuff that is disallowed.
+    { notition(amount_note, 'wrong', 'Negative disallowed');
       spend_time.value = old_spend_val;
-      return;
     }
-    amount_note.innerHTML = '(' + pct + '%)';
-    amount_note.style = 'color:#777'
-    old_spend_val = spend_time.value;
+    else if( spend_time.value > power_available() )
+    { notition(amount_note, 'wrong', 'Dont have that much');
+      spend_time.value = old_spend_val;
+    }
+    else
+    { pct = (100*spend_time.value/power_available()).toString().substr(0,4)
+      notition(amount_note, 'note', '(' + pct + '%)');
+      old_spend_val = spend_time.value;
+    }
 }
 
 /*
@@ -90,18 +113,11 @@ function update_spend_addr()
 {
     update_power_time();
     if( spend_addr.value == '' )
-    { spend_addr_note.innerHTML='Needs recipient';
-      spend_addr_note.style='color:#444';
-      return;
-    }
-    if( participated[spend_addr.value] == null )
-    { spend_addr_note.innerHTML='(ok)';
-      spend_addr_note.style = 'color:#777'
-    }
+    { notition(spend_addr_note, 'hint', 'Needs recipient'); }
+    else if( participated[spend_addr.value] == null )
+    { notition(spend_addr_note, 'note', '(ok)'); }
     else
-    { spend_addr_note.innerHTML='Already voted for';
-      spend_addr_note.style='color:red';
-    }
+    { notition(spend_addr_note, 'wrong', 'Already voted for'); }
 }
 
 function spend_time_button()

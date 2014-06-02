@@ -5,7 +5,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Prototype VOTE MINIONS</title>
         <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="css/syntax.css">
         <link rel="stylesheet" href="css/main.css">
     </head>
 <body>
@@ -16,11 +15,12 @@
 <button id="register_button" onclick="register()">Grow your powah!</button>
 
 <span id="voting_whole">
-<p>SUCH Voting-powah grows EVERY MILLISECOND: <span id="power_time"></span></p>
+<p>SUCH Voting-powah grows EVERY MILLISECOND: <b id="power_time"></b></p>
 
-<table>
+<table id="entry_table">
 <tr><td><b>Vote</b></td><td>amount:</td><td>
-    <input type="number" id="spend_time" value="0" onkeyup="update_spend_time()" onchange="update_spend_time();"></td><td id="amount_note"></td></tr>
+    <input type="number" id="spend_time" value="0" onkeyup="update_spend_time()" onchange="update_spend_time();"><button id="to_fraction", onclick="button_to_fraction()">to 10%</button>
+</td><td id="amount_note"></td></tr>
 <br>
 <tr><td></td><td>To:</td><td>
 <!-- Really we probably want a address input,
