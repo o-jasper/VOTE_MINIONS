@@ -5,7 +5,7 @@ Tired of being a totalitarian dictator, i decided to give them a voting system
 Hopefully the PoC release will have a nice browser so this can be shown nicely.
 
 * [Use POC (5) Bindings](https://github.com/ethereum/cpp-ethereum/wiki/PoC-5-JS-Bindings)
-  for nice interface.(first basic)
+  for nice interface.(first basic) Maybe find some examples for comparison.
 
 * Figure out how to deal with people without ethers. (ask Vlad Zamfir)
 
@@ -19,4 +19,4 @@ Hopefully the PoC release will have a nice browser so this can be shown nicely.
   time?
 
 * (eventually) identifying humans. Already can add a contract address that does
-  this? Use DDOUG?
+  this? Use DDOUG to allow later modification of this system, given many votes?
