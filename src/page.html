@@ -5,13 +5,28 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Prototype VOTE MINIONS</title>
         <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="/css/syntax.css">
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="css/syntax.css">
+        <link rel="stylesheet" href="css/main.css">
     </head>
-    <body>
+<body>
+<h1>Prototype VOTE MINIONS</h1>
+
+<a href="https://www.youtube.com/watch?v=9pSh0VAVYn4">VOTE or DIE</a>
+
+<p>SUCH Voting-powah grows EVERY MILLISECOND: <span id="power_time"></span></p>
+
+<table>
+<tr><td>Vote</td><td>amount:</td><td>
+    <input type="number" id="spend_time" value="0", onchange="spend_change();"></td><td id="amount_note"></td></tr>
+<br>
+<tr><td></td><td>To</td><td>
+    <input type="text" id="spend_addr"></td><td id="spend_addr_note"></td></tr>
+</table> <!--Really we probably want a address input, than can look at NameReg-->
+<button id="button" onclick="spend_time_button();">VOTE</button> 
+
+<p id="progress"></p>
+<p id="passed"></p>
+
+<script src="js.js"></script>
 </body>
-<h1>Prototype vote Minions</h1>
-
-Minion voter (nothing here yet)
-
 </html>
