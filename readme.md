@@ -9,7 +9,9 @@ Hopefully the PoC release will have a nice browser so this can be shown nicely.
 
 * Figure out how to deal with people without ethers. (ask Vlad Zamfir)
 
-* Test more. Both on testnet and with readily-runnable tests.
+* Test more. Both on testnet and with readily-runnable tests. For instance with
+  [evm-sim](https://github.com/EtherCasts/evm-sim/) or 
+  [ace](https://gitorious.org/robmyers/ethereum-ace/source/20aba9c820bbfa2a7bd7bf9870411663a438f500:).
 
 #### Some more things
 

@@ -2,6 +2,9 @@
 
 default: src/voting.lll
 
+test:  # Note: dont expect to work right now. Requires evm-sim
+	py.test2 
+
 %.lll: %.se  # Then stuff this LLL into ethereum.
 	serpent compile_to_LLL "`cat $<`" > $@
 
