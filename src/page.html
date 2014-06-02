@@ -13,19 +13,26 @@
 
 <a href="https://www.youtube.com/watch?v=9pSh0VAVYn4">VOTE or DIE</a>
 
+<button id="register_button" onclick="register()">Grow your powah!</button>
+
+<span id="voting_whole">
 <p>SUCH Voting-powah grows EVERY MILLISECOND: <span id="power_time"></span></p>
 
 <table>
-<tr><td>Vote</td><td>amount:</td><td>
-    <input type="number" id="spend_time" value="0", onchange="spend_change();"></td><td id="amount_note"></td></tr>
+<tr><td><b>Vote</b></td><td>amount:</td><td>
+    <input type="number" id="spend_time" value="0" onkeyup="update_spend_time()" onchange="update_spend_time();"></td><td id="amount_note"></td></tr>
 <br>
 <tr><td></td><td>To:</td><td>
-    <input type="text" id="spend_addr"></td><td id="spend_addr_note"></td></tr>
-</table> <!--Really we probably want a address input, than can look at NameReg-->
+<!-- Really we probably want a address input,
+     that can do stuff like look at NameReg automatically.
+     But also want to have it be an accepted votable.. -->
+    <input type="text" id="spend_addr", onkeyup="update_spend_addr()" onchange="update_spend_addr()"></td><td id="spend_addr_note"></td></tr>
+</table> 
 <button id="button" onclick="spend_time_button();">VOTE</button> 
 
 <p id="progress"></p>
 <p id="passed"></p>
+</span>
 
 <script src="js.js"></script>
 </body>
