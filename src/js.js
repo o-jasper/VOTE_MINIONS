@@ -75,8 +75,7 @@ function complete_spend(vote_for)
 function do_spend_time(vote_for, amount)
 {   
     if(amount < power_available())  // Have enough.
-    {   //eth.transact(_sec, 0, vote_address, bin(vote_for), 1000, 1, complete_spend(vote_for));
-//        alert("such VOTE; " + amount + "ms for " + vote_for);
+    {//eth.transact(_sec, 0, vote_address, bin(vote_for), 1000, 1, complete_spend(vote_for));
         participated[vote_for] = {'amount':amount, 'passed':false};
         update_progress();
     }
@@ -111,7 +110,7 @@ function update_progress()
         {    progress_innerHTML += '<tr><td>' + key + '</td><td>' + obj.amount + '</td></tr>'; }
     }
     if( passed_innerHTML != '' )
-    {   passed.innerHTML = '<h4>Passed</h4><table>' + passed_innerHTML + '</table>'; }
+    {   passed.innerHTML = '<h4>Transactions arrived</h4><table>' + passed_innerHTML + '</table>'; }
     if( progress_innerHTML != '' )
-    {   progress.innerHTML = '<h4>Progress</h4><table>' + progress_innerHTML + '</table>'; }
+    {   progress.innerHTML = '<h4>Transactions in progress</h4><table>' + progress_innerHTML + '</table>'; }
 }
