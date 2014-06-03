@@ -117,7 +117,7 @@ function complete_spend(vote_for)
 
 function pretend_transact(vote_for, amount)
 {
-    var_from_time = var_from_time + amount;
+    // var_from_time = var_from_time + amount; // Goes negative..
 }
 
 function do_spend_time(vote_for, amount)
