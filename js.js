@@ -32,7 +32,21 @@ function power_available()  // Amount of time available to spend.
 function update_power_time()
 {   
     date = new Date();
-    power_time.innerHTML = power_available();
+    ms = power_available();
+    s  = Math.floor(ms/1000);
+    m  = Math.floor(s/60);
+    h  = Math.floor(m/60);
+    d  = Math.floor(h/24);
+    
+    ms %= 1000;
+    s = (s%60).toString();
+    m = (m%60).toString();
+    h = (h%24).toString();
+    if( s.length == 1 ){ s = '0' + s; }
+    if( m.length == 1 ){ m = '0' + m; }
+    if( h.length == 1 ){ h = '0' + h; }
+
+    power_time.innerHTML = d + 'days, ' + h + ':' + m + ':' + s + ' and ' + ms + 'ms';
 }
 
 function notition(element, className, innerHTML)
