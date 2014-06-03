@@ -160,13 +160,23 @@ function voting(which)
     document.getElementById("register_button").hidden = !which;
 }
 
+
+var pokingtons_patience = 1000;
+function sir_pokington()
+{   
+    update_spend_time();
+    update_spend_addr();
+    setTimeout(function(){ sir_pokington(); }, pokingtons_patience);
+}
+
+
 function register()
 {   var_from_time = date.getTime();
     voting(false);
     update_power_time();
+    
+    sir_pokington();
 }
 
 voting(from_time() == 0);
 spend_time.value= old_spend_val;
-update_power_time();
-update_spend_addr();
