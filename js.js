@@ -29,15 +29,14 @@ function from_time()
 function power_available()  // Amount of time available to spend.
 {   return date.getTime() - from_time(); }
 
-function update_power_time()
-{   
-    date = new Date();
-    ms = power_available();
+function to_time_string(milliseconds, upto)
+{
+    ms = milliseconds;
     s  = Math.floor(ms/1000);
     m  = Math.floor(s/60);
     h  = Math.floor(m/60);
     d  = Math.floor(h/24);
-    
+
     ms %= 1000;
     s = (s%60).toString();
     m = (m%60).toString();
@@ -45,8 +44,17 @@ function update_power_time()
     if( s.length == 1 ){ s = '0' + s; }
     if( m.length == 1 ){ m = '0' + m; }
     if( h.length == 1 ){ h = '0' + h; }
+    
+    str = d + ' days, ' + h + ':' + m + ':' + s;
+    // Note: currently just milliseconds.
+    if(upto == 'ms'){ str += ' and ' + ms + 'ms'; }
+    return str;
+}
 
-    power_time.innerHTML = d + 'days, ' + h + ':' + m + ':' + s + ' and ' + ms + 'ms';
+function update_power_time()
+{   
+    date = new Date();
+    power_time.innerHTML = to_time_string(power_available());
 }
 
 function notition(element, className, innerHTML)
@@ -109,8 +117,7 @@ function complete_spend(vote_for)
 
 function pretend_transact(vote_for, amount)
 {
-//    alert(amount);
-//    var_from_time = var_from_time + amount;
+    var_from_time = var_from_time + amount;
 }
 
 function do_spend_time(vote_for, amount)
@@ -163,9 +170,9 @@ function update_progress()
         {    progress_innerHTML += '<tr><td>' + key + '</td><td>' + obj.amount + '</td></tr>'; }
     }
     if( passed_innerHTML != '' )
-    {   passed.innerHTML = '<h4>Transactions arrived</h4><table>' + passed_innerHTML + '</table>'; }
+    {   passed.innerHTML = '<h4>Votes arrived</h4><table>' + passed_innerHTML + '</table>'; }
     if( progress_innerHTML != '' )
-    {   progress.innerHTML = '<h4>Transactions in progress</h4><table>' + progress_innerHTML + '</table>'; }
+    {   progress.innerHTML = '<h4>Votes underway</h4><table>' + progress_innerHTML + '</table>'; }
 }
 
 function voting(which)
