@@ -1,0 +1,43 @@
+<html><body>
+
+<p style="font-weight:bold">Proof of Concept only!
+Only possibly works on Ethereum browser.</p>
+
+<p>Browser open time: <span id="browser_open_time">?</span>.</p>
+
+<p><span id="self">?</span> has: <span id="ether">?</span> ether.</p>
+
+<p>You have: <span id="vote_time">?</span> vote time.
+(zero is not registered)</p>
+
+<p>Current time is: <span id="cur_time">?</span></p>
+
+<script>
+var date = new Date();
+document.getElementById("browser_open_time").innerText = date.getTime()/1000;
+
+document.getElementById("self").innerText  = eth.secretToAddress(eth.key);
+document.getElementById("ether").innerText = eth.balanceAt(eth.secretToAddress(eth.key));
+
+var addr = "59a508c786b510d4e6ba34b497f378f970af35ed".bin();
+
+function update()
+{ document.getElementById("vote_time").innerText = eth.storageAt(addr, eth.secretToAddress(eth.key));
+  var date = new Date();
+  document.getElementById("cur_time").innerText = date.getTime()/1000;
+}
+update();
+
+eth.changed.connect(update);
+</script>
+
+<pre>
+ document.getElementById("ether").innerText = eth.balanceAt(eth.secretToAddress(eth.key));
+ document.getElementById("vote_time").innerText = eth.storageAt(eth.key, u256.fromAddress(addr));
+  date = new Date();
+  document.getElementById("cur_time").innerText = date.getTime()/1000;
+
+</pre>
+
+</body></html>
+
