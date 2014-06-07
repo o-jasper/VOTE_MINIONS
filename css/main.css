@@ -3,6 +3,8 @@ body {
   text-size:140%
 }
 
+td{vertical-align:text-top;}
+
 .wrong{ color:red }
 .note{ color:#777 }
 .hint{ color:#444 }
