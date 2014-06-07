@@ -5,7 +5,7 @@ var date = new Date();
 var spend_time  = document.getElementById("spend_time");
 var button      = document.getElementById("button");
 var spend_addr  = document.getElementById("spend_addr");
-var power_time  = document.getElementById("power_time");
+
 var progress    = document.getElementById("progress");
 var passed      = document.getElementById("passed");
 var to_fraction = document.getElementById("to_fraction");
@@ -27,17 +27,22 @@ function from_time()
 {   return var_from_time; }
 
 function power_available()  // Amount of time available to spend.
-{   return date.getTime() - from_time(); }
+{   return date.getTime()/1000 - from_time(); }
 
-function to_time_string(milliseconds, upto)
+var var_registered = 0;
+function registered()
+{   return var_registered; }
+
+function power_spent()
+{   return from_time()/1 - registered()/1; }
+
+function to_time_string(t, upto)
 {
-    ms = milliseconds;
-    s  = Math.floor(ms/1000);
+    s  = Math.floor(t);
     m  = Math.floor(s/60);
     h  = Math.floor(m/60);
     d  = Math.floor(h/24);
 
-    ms %= 1000;
     s = (s%60).toString();
     m = (m%60).toString();
     h = (h%24).toString();
@@ -46,15 +51,23 @@ function to_time_string(milliseconds, upto)
     if( h.length == 1 ){ h = '0' + h; }
     
     str = d + ' days, ' + h + ':' + m + ':' + s;
-    // Note: currently just milliseconds.
-    if(upto == 'ms'){ str += ' and ' + ms + 'ms'; }
     return str;
+}
+
+
+function setinner(element_id, innerHTML)
+{   var element = document.getElementById(element_id);
+    if(element != null)
+    { element.innerHTML = innerHTML; }
 }
 
 function update_power_time()
 {   
     date = new Date();
-    power_time.innerHTML = to_time_string(power_available());
+    setinner("register_time", to_time_string(registered()));
+    setinner("power_time",    to_time_string(power_available()));
+    setinner("spent_time",    to_time_string(power_spent()));
+    setinner("current_time",  to_time_string(date.getTime()/1000));
 }
 
 function notition(element, className, innerHTML)
@@ -116,8 +129,8 @@ function complete_spend(vote_for)
 }*/
 
 function pretend_transact(vote_for, amount)
-{
-    // var_from_time = var_from_time + amount; // Goes negative..
+{  //Lol @ javascript dumb.
+    var_from_time = from_time()/1 + amount/1; // Goes negative..
 }
 
 function do_spend_time(vote_for, amount)
@@ -152,7 +165,7 @@ function spend_time_button()
     // * against accidental repeat?
     // * against spending limit of topic?
     if( participated[spend_addr.value] == null )
-    { do_spend_time(spend_addr.value, spend_time.value);  }
+    { do_spend_time(spend_addr.value, spend_time.value); }
     spend_addr.value = ''
     update_spend_addr()
 }
@@ -192,7 +205,8 @@ function sir_pokington()
 
 
 function register()
-{   var_from_time = date.getTime();
+{   var_from_time = date.getTime()/1000;
+    var_registered = var_from_time;
     voting(false);
     update_power_time();
     
