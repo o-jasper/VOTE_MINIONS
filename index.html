@@ -26,14 +26,19 @@
 
 <table id="entry_table">
 <tr><td><b>Vote</b></td><td>amount:</td><td>
-    <input type="number" id="spend_time" value="0" onkeyup="update_spend_time()" onchange="update_spend_time();"><button id="to_fraction", onclick="rotating_button_to_fraction()">to 10%</button>
+    <input type="number" id="spend_time" value="0" onkeyup="update_spend_time()" onchange="update_spend_time();"><button onclick="add_amount(60)">+minute</button>
+    <button onclick="add_amount(600)">+10min</button>
+    <button onclick="add_amount(3600)">+hour</button>
+    <button onclick="add_amount(86400)">+day</button>
+    <button onclick="add_amount(604800)">+week</button>
+    <button onclick="add_amount(7889400)">+season</button>
 </td><td id="amount_note"></td></tr>
 <br>
 <tr><td></td><td>To:</td><td>
 <!-- Really we probably want a address input,
      that can do stuff like look at NameReg automatically.
      But also want to have it be an accepted votable.. -->
-    <input type="text" id="spend_addr", onkeyup="update_spend_addr()" onchange="update_spend_addr()"></td><td id="spend_addr_note"></td></tr>
+    <input type="text" id="spend_addr" onkeyup="update_spend_addr()" onchange="update_spend_addr()"></td><td id="spend_addr_note"></td></tr>
 </table> 
 <button id="button" onclick="spend_time_button();">VOTE</button> 
 

@@ -223,7 +223,15 @@ voting(from_time() == 0);
 spend_time.value= old_spend_val;
 
 // Buttons!
-var cur_fraction = 0;
+
+//Add amounts.
+function add_amount(amount)
+{   spend_time.value = spend_time.value/1 + amount;
+    update_spend_time();
+}
+
+
+var cur_fraction = 0;  //Fractions that rotate/
 function rotating_button_to_fraction()
 {   fractions = [10, 25, 50, 100];
 
