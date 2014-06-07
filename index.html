@@ -15,7 +15,14 @@
 <button id="register_button" onclick="register()">Grow your powah!</button>
 
 <span id="voting_whole">
-<p>SUCH Voting-powah grows EVERY MILLISECOND: <b id="power_time"></b></p>
+<p>SUCH Voting-powah grows EVERY SECOND:</p>
+
+<table>
+<tr><td></td> <td>Current:</td>      <td id="current_time"></td></tr>
+<tr><td class="note">minus</td> <td>Spent:</td>    <td id="spent_time"></td></tr>
+<tr style="border-bottom: 2px"><td class="note">minus</td> <td>Registered:</td> <td id="register_time"></td></tr>
+<tr><td class="note">equals</td> <td>Powah</td>          <td id="power_time"></td></tr>
+</table>
 
 <table id="entry_table">
 <tr><td><b>Vote</b></td><td>amount:</td><td>
@@ -33,10 +40,6 @@
 <p id="progress"></p>
 <p id="passed"></p>
 </span>
-
-<p>r <span id="register_time"></span></p>
-<p>s <span id="spent_time"></span></p>
-<p>c <span id="current_time"></span></p>
 
 <script src="js.js"></script>
 </body>

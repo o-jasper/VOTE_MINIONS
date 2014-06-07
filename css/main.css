@@ -1,4 +1,3 @@
-
 body {
   font: Arial, sans-serif;
   text-size:140%
@@ -8,7 +7,6 @@ body {
 .note{ color:#777 }
 .hint{ color:#444 }
 
-#spend_addr{width:100%}
+#spend_addr{width:95%}
 
 #to_fraction{width:6em}
-/* TODO Needs some spacing in that table */
