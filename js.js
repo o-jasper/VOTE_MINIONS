@@ -96,33 +96,36 @@ function notition(element, className, innerHTML)
 
 
 var old_spend_val = 0;
+var wrong_cnt = 0, wait_time = 4;
+function update_spend_time_wrong_amount(which)
+{
+    notition(amount_note, 'wrong', which);
+    spend_time.value = old_spend_val;
+    wrong_cnt = wait_time;
+}
+
 function update_spend_time()
 {   
     update_power_time();
 
     if( spend_time.value == 0 && spend_time.value!='0' )  //TODO get something decent.
-    { notition(amount_note, 'wrong', 'Not a number');
-      spend_time.value = old_spend_val;
-    }
+    { return update_spend_time_wrong_amount('Not a number'); }
     else if( spend_time.value < 0 )  // Reset stuff that is disallowed.
-    { notition(amount_note, 'wrong', 'Negative disallowed');
-      spend_time.value = old_spend_val;
-    }
+    { return update_spend_time_wrong_amount('Negative disallowed'); }
     else if( spend_time.value > power_available() )
-    { notition(amount_note, 'wrong', 'Dont have that much');
-      spend_time.value = old_spend_val;
-    }
-    else
+    { return update_spend_time_wrong_amount('Dont have that much'); }
+    else if( wrong_cnt <= 0 )
     { pct = (100*spend_time.value/power_available()).toString().substr(0,4)
       notition(amount_note, 'note', '(' + pct + '%)');
       old_spend_val = spend_time.value;
     }
+    else{ wrong_cnt -= 1; }
     ge_set_innerHTML('spend_time_show', to_time_string(spend_time.value));
     if( increment_buttons_p )
     {   t = power_available()/1 - spend_time.value/1;
         for(var i = 0 ; i< increment_buttons.length ; i++)
         {  if( t < increment_buttons[i][1] ) // Not enough for adding this much.
-           { ge_set_innerHTML(increment_buttons[i][0], null, 'note'); }
+           { ge_set_innerHTML(increment_buttons[i][0], null, 'grey_button'); }
            else
            { ge_set_innerHTML(increment_buttons[i][0], null, ''); }
         }
