@@ -1,0 +1,16 @@
+{
+  [0] "VOTE_MINIONS"
+  (call (- (gas) 100) 0x2d0aceee7e5ab874e22ccf8d1a649f59106d74e8 0 0 16 0 0)
+
+  (return 0 (lll {
+    [0x00] @@(caller)
+    (if (and @0x00 (and (= (calldatasize) 0x40) (> (timestamp) (+ @0x00 (calldataload 1)))))
+      { [0x20] (calldataload 1)
+        (call (- gas 30) (calldataload 0) 0 0x20 0x20 0 0)  ; Call vote thing.
+        [[(caller)]] (+ @0x00 @0x20)
+      }
+      { [[(caller)]] (timestamp)
+        [[(+ (caller) 0x20)]] (timestamp)
+      })
+  } 0))
+}
