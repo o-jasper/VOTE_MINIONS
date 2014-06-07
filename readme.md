@@ -1,5 +1,6 @@
 # VOTE_MINIONS
-Tired of being a totalitarian dictator, i decided to give them a voting system
+Tired of being a totalitarian dictator, i decided to give them a voting system.
+[Here you can see it live](http://o-jasper.github.io/VOTE_MINIONS/). 
 
 ## TODO/Needs
 Hopefully the PoC release will have a nice browser so this can be shown nicely.
@@ -25,3 +26,7 @@ Hopefully the PoC release will have a nice browser so this can be shown nicely.
 
 * (eventually) identifying humans. Already can add a contract address that does
   this? Use DDOUG to allow later modification of this system, given many votes?
+
+## About
+Created by Jasper den Ouden and Aaron Remi Bale for demonstration and future use
+for [bitvotes](http://arkbg1.github.io/BitVote).
