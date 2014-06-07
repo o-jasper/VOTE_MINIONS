@@ -91,19 +91,6 @@ function notition(element, className, innerHTML)
     element.className = className;
 }
 
-var fractions = [10, 25, 50, 100];
-var cur_fraction = 0;
-function button_to_fraction()
-{
-    spend_time.value = Math.round(fractions[cur_fraction]*power_available()/100);
-    cur_fraction += 1;
-    if(cur_fraction > fractions.length - 1)
-    {  cur_fraction = 0; }
-    text = 'to ' + fractions[cur_fraction] + '%';
-    if( text == 'to 100%' ){ text = 'ALL'; }
-    ge_set_innerHTML("to_fraction", text);
-    update_spend_time();
-}
 
 var old_spend_val = 0;
 function update_spend_time()
@@ -234,3 +221,18 @@ function register()
 
 voting(from_time() == 0);
 spend_time.value= old_spend_val;
+
+// Buttons!
+var cur_fraction = 0;
+function rotating_button_to_fraction()
+{   fractions = [10, 25, 50, 100];
+
+    spend_time.value = Math.round(fractions[cur_fraction]*power_available()/100);
+    cur_fraction += 1;
+    if(cur_fraction > fractions.length - 1)
+    {  cur_fraction = 0; }
+    text = 'to ' + fractions[cur_fraction] + '%';
+    if( text == 'to 100%' ){ text = 'ALL'; }
+    ge_set_innerHTML("to_fraction", text);
+    update_spend_time();
+}
