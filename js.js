@@ -2,13 +2,34 @@
 
 var date = new Date();
 
-var spend_time  = document.getElementById("spend_time");
-var button      = document.getElementById("button");
-var spend_addr  = document.getElementById("spend_addr");
+var elements = {}
 
-var progress    = document.getElementById("progress");
-var passed      = document.getElementById("passed");
-var to_fraction = document.getElementById("to_fraction");
+function ge(element_id)  // Assumes ids do not get added afterwards!
+{  got = elements[element_id]
+   if(got == null)
+   { element = document.getElementById(element_id);
+     if(element == null)
+     { elements[element_id] = 'none'; }
+     else
+     { elements[element_id] = element
+       got = element;
+     }
+   }
+   else if(got == 'none')
+   { return null; }
+   return got
+}
+
+function ge_set_innerHTML(element_id, innerHTML, className)
+{ got = ge(element_id)
+  if( got!=null )
+  { if(innerHTML != null){ got.innerHTML = innerHTML; }
+    if(className != null){ got.className = className; }
+  }
+}
+
+var spend_time  = document.getElementById("spend_time");
+var spend_addr  = document.getElementById("spend_addr");
 
 var amount_note     = document.getElementById("amount_note");
 var spend_addr_note = document.getElementById("spend_addr_note");
@@ -54,20 +75,13 @@ function to_time_string(t, upto)
     return str;
 }
 
-
-function setinner(element_id, innerHTML)
-{   var element = document.getElementById(element_id);
-    if(element != null)
-    { element.innerHTML = innerHTML; }
-}
-
 function update_power_time()
 {   
     date = new Date();
-    setinner("register_time", to_time_string(registered()));
-    setinner("power_time",    to_time_string(power_available()));
-    setinner("spent_time",    to_time_string(power_spent()));
-    setinner("current_time",  to_time_string(date.getTime()/1000));
+    ge_set_innerHTML("register_time", to_time_string(registered()));
+    ge_set_innerHTML("power_time",    to_time_string(power_available()));
+    ge_set_innerHTML("spent_time",    to_time_string(power_spent()));
+    ge_set_innerHTML("current_time",  to_time_string(date.getTime()/1000));
 }
 
 function notition(element, className, innerHTML)
@@ -86,7 +100,7 @@ function button_to_fraction()
     {  cur_fraction = 0; }
     text = 'to ' + fractions[cur_fraction] + '%';
     if( text == 'to 100%' ){ text = 'ALL'; }
-    to_fraction.innerHTML = text;
+    ge_set_innerHTML("to_fraction", text);
     update_spend_time();
 }
 
@@ -183,9 +197,13 @@ function update_progress()
         {    progress_innerHTML += '<tr><td>' + key + '</td><td>' + obj.amount + '</td></tr>'; }
     }
     if( passed_innerHTML != '' )
-    {   passed.innerHTML = '<h4>Votes arrived</h4><table>' + passed_innerHTML + '</table>'; }
+    {   ge_set_innerHTML("passed",
+                         '<h4>Votes arrived</h4><table>' + passed_innerHTML + '</table>');
+    }
     if( progress_innerHTML != '' )
-    {   progress.innerHTML = '<h4>Votes underway</h4><table>' + progress_innerHTML + '</table>'; }
+    {   ge_set_innerHTML("progress",
+                         '<h4>Votes underway</h4><table>' + progress_innerHTML + '</table>');
+    }
 }
 
 function voting(which)
