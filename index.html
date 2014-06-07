@@ -26,12 +26,14 @@
 
 <table id="entry_table">
 <tr><td><b>Vote</b></td><td>amount:</td><td>
-    <input type="number" id="spend_time" value="0" onkeyup="update_spend_time()" onchange="update_spend_time();"><button onclick="add_amount(60)">+minute</button>
-    <button onclick="add_amount(600)">+10min</button>
-    <button onclick="add_amount(3600)">+hour</button>
-    <button onclick="add_amount(86400)">+day</button>
-    <button onclick="add_amount(604800)">+week</button>
-    <button onclick="add_amount(7889400)">+season</button>
+    <input type="number" id="spend_time" value="0" onkeyup="update_spend_time()" onchange="update_spend_time();">
+    <button id="+5s"    onclick="add_amount(5)">+5 seconds</button>
+    <button id="+min"    onclick="add_amount(60)">+minute</button>
+    <button id="+10min"  onclick="add_amount(600)">+10min</button>
+    <button id="+hour"   onclick="add_amount(3600)">+hour</button>
+    <button id="+day"    onclick="add_amount(86400)">+day</button>
+    <button id="+week"   onclick="add_amount(604800)">+week</button>
+    <button id="+season" onclick="add_amount(7889400)">+season</button>
 </td><td id="amount_note"></td></tr>
 <br>
 <tr><td></td><td>To:</td><td>

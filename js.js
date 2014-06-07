@@ -48,7 +48,7 @@ function from_time()
 {   return var_from_time; }
 
 function power_available()  // Amount of time available to spend.
-{   return date.getTime()/1000 - from_time(); }
+{   return Math.floor(date.getTime()/1000 - from_time()); }
 
 var var_registered = 0;
 function registered()
@@ -113,6 +113,16 @@ function update_spend_time()
     { pct = (100*spend_time.value/power_available()).toString().substr(0,4)
       notition(amount_note, 'note', '(' + pct + '%)');
       old_spend_val = spend_time.value;
+    }
+    t = power_available()/1 - spend_time.value/1;
+    // NOTE may want to use this list to also create the buttons?
+    buttons = [["+5s", 5], ["+min", 60], ["+10min", 600], ["+hour", 3600], 
+               ["+day", 86400], ["+week", 604800], ["+season", 7889400]]
+    for(var i = 0 ; i< buttons.length ; i++)
+    {  if( t < buttons[i][1] ) // Not enough for adding this much.
+       { ge_set_innerHTML(buttons[i][0],   null, 'note'); }
+       else
+       { ge_set_innerHTML(buttons[i][0],   null, ''); }
     }
 }
 
