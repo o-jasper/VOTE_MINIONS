@@ -117,6 +117,7 @@ function update_spend_time()
       notition(amount_note, 'note', '(' + pct + '%)');
       old_spend_val = spend_time.value;
     }
+    ge_set_innerHTML('spend_time_show', to_time_string(spend_time.value));
     if( increment_buttons_p )
     {   t = power_available()/1 - spend_time.value/1;
         for(var i = 0 ; i< increment_buttons.length ; i++)
@@ -275,4 +276,13 @@ function rotating_button_to_fraction()
     if( text == 'to 100%' ){ text = 'ALL'; }
     ge_set_innerHTML("to_fraction", text);
     update_spend_time();
+}
+
+function toggle_manual()
+{
+    spend_time.hidden = !spend_time.hidden;
+    show = ge('spend_time_show');
+    show.hidden = !spend_time.hidden;
+    if( show.hidden ){ ge_set_innerHTML('toggle_manual', '&rarr;Show'); }
+    else{ ge_set_innerHTML('toggle_manual', '&rarr;Manual'); }
 }
