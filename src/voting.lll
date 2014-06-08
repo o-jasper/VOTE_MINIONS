@@ -1,16 +1,18 @@
 {
-  [0] "VOTE_MINIONS"
+  [0] "VOTE_MINIONS"  ;Register.
   (call (- (gas) 100) 0x2d0aceee7e5ab874e22ccf8d1a649f59106d74e8 0 0 16 0 0)
 
   (return 0 (lll {
     [0x00] @@(caller)
     (if (and @0x00 (and (= (calldatasize) 0x40) (> (timestamp) (+ @0x00 (calldataload 1)))))
-      { [0x20] (calldataload 1)
-        (call (- gas 30) (calldataload 0) 0 0x20 0x20 0 0)  ; Call vote thing.
-        [[(caller)]] (+ @0x00 @0x20)
+      { [0x20] (calldataload 1) ; Call the item being voted on.
+        (call (- gas 30) (calldataload 0) 0 0x20 0x20 0x40 0x20)
+       ; Account for it as spent.(dont believe the contract if it reports too high.
+        (if (> @0x40 @0x20)
+          { [[(caller)]] (+ @0x00 @0x20) }
+          { [[(caller)]] (+ @0x00 @0x40) })
       }
       { [[(caller)]] (timestamp)
-        [[(+ (caller) 0x20)]] (timestamp)
       })
   } 0))
 }

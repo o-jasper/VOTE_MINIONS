@@ -7,6 +7,9 @@ Only possibly works on Ethereum browser.</p>
 
 <p><span id="self">?</span> has: <span id="ether">?</span> ether.</p>
 
+<h3>Voting system</h3>
+
+<p>Voting system has: <span id="vote_time_bal">?</span> ethers.
 <p>You have: <span id="vote_time">?</span> vote time.
 (zero is not registered)</p>
 
@@ -19,10 +22,11 @@ document.getElementById("browser_open_time").innerText = date.getTime()/1000;
 document.getElementById("self").innerText  = eth.secretToAddress(eth.key);
 document.getElementById("ether").innerText = eth.balanceAt(eth.secretToAddress(eth.key));
 
-var addr = "59a508c786b510d4e6ba34b497f378f970af35ed".bin();
+var addr = "4546d041c4d1bab6fae7587f62a541c3ba1456bb".bin();
 
 function update()
 { document.getElementById("vote_time").innerText = eth.storageAt(addr, eth.secretToAddress(eth.key));
+  document.getElementById("vote_time_bal").innerText = eth.balanceAt(addr);
   var date = new Date();
   document.getElementById("cur_time").innerText = date.getTime()/1000;
 }
